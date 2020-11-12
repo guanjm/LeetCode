@@ -2,7 +2,7 @@ package indi.gjm.no_2;
 
 /**
  * 两数相加
- * @Author : ex_guanjm
+ * @Author : guanjm
  * @Date: 2020/11/12 17:06
  *
  */
