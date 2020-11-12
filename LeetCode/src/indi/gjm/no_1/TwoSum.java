@@ -3,26 +3,24 @@ package indi.gjm.no_1;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 两数之和
+ * @Author : ex_guanjm
+ * @Date: 2020/11/11 17:06
+ *
+ */
 public class TwoSum {
 
-    /**
-     *
-     * @Author : ex_guanjm
-     * @Date: 2020/11/11 17:34
-     * @param arrays    数组
-     * @param target    目标值
-     *
-     */
-    private static int[] getResult(int[] arrays, int target) {
+    private static int[] getResult(int[] nums, int target) {
         int[] index = new int[2];
         Map<Integer, Integer> tmp = new HashMap<>();
-        for (int i = 0; i < arrays.length; i++) {
-            Integer no = tmp.get(target - arrays[i]);
+        for (int i = 0; i < nums.length; i++) {
+            Integer no = tmp.get(target - nums[i]);
             if (no != null) {
                 index[0] = no;
                 index[1] = i;
             }
-            tmp.put(arrays[i], i);
+            tmp.put(nums[i], i);
         }
         return index;
     }
