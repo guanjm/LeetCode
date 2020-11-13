@@ -11,22 +11,26 @@ import java.util.*;
 public class LengthOfLongestSubstring {
 
     private static int getResult(String s) {
-        List<Character> result = new LinkedList<>();
+        List<Character> result = new ArrayList<>();
+        List<Character> container = new ArrayList<>();
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (result.contains(c)) {
-                Iterator<Character> iterator = result.iterator();
+            if (container.contains(s.charAt(i))) {
+                if (container.size() > result.size()) {
+                    result.clear();
+                    result.addAll(container);
+                }
+                Iterator<Character> iterator = container.iterator();
                 while (iterator.hasNext()) {
-                    Character next = iterator.next();
+                    Character c = iterator.next();
                     iterator.remove();
-                    if (next == c) {
+                    if (c == s.charAt(i)) {
                         break;
                     }
                 }
             }
-            result.add(c);
+            container.add(s.charAt(i));
         }
-        return result.size();
+        return Math.max(result.size(), container.size());
     }
 
     public static void main(String[] args) {

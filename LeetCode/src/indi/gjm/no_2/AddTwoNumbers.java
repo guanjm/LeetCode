@@ -9,37 +9,27 @@ package indi.gjm.no_2;
 public class AddTwoNumbers {
 
     private static ListNode getResult(ListNode l1, ListNode l2) {
-        ListNode result = null;
-        ListNode lastNode = null;
-        int add = 0;
-        while (l1 != null || l2 != null || add > 0) {
-            int val1 = 0;
-            int val2 = 0;
+        ListNode result = new ListNode(0);
+        ListNode tmp = null;
+        int sum = 0;
+        while (l1 != null || l2 != null || sum != 0) {
             if (l1 != null) {
-                val1 = l1.getVal();
-                l1 = l1.getNext();
+                sum += l1.val;
+                l1 = l1.next;
             }
             if (l2 != null) {
-                val2 = l2.getVal();
-                l2 = l2.getNext();
+                sum += l2.val;
+                l2 = l2.next;
             }
-            int val3 = val1 + val2 + add;
-            if (val3 > 10) {
-                add = 1;
-                val3 = val3 - 10;
+            if (tmp == null) {
+                tmp = result;
+                result.val = sum % 10;
             } else {
-                add = 0;
+                ListNode currentNode = new ListNode(sum % 10);
+                tmp.next = currentNode;
+                tmp = currentNode;
             }
-            ListNode currentNode;
-            if (lastNode == null) {
-                result = lastNode = new ListNode();
-                lastNode.setVal(val3);
-            } else {
-                currentNode = new ListNode();
-                lastNode.setNext(currentNode);
-                currentNode.setVal(val3);
-                lastNode = currentNode;
-            }
+            sum = sum / 10;
         }
         return result;
     }
