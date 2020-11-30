@@ -1,9 +1,7 @@
 package indi.gjm.no_1030;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 /**
  * 距离顺序排序矩阵单元格
