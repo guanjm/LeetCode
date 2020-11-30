@@ -16,19 +16,19 @@ public class AddTwoNumbers {
         int sum = 0;
         while (l1 != null || l2 != null || sum != 0) {
             if (l1 != null) {
-                sum += l1.getVal();
-                l1 = l1.getNext();
+                sum += l1.val;
+                l1 = l1.next;
             }
             if (l2 != null) {
-                sum += l2.getVal();
-                l2 = l2.getNext();
+                sum += l2.val;
+                l2 = l2.next;
             }
             if (tmp == null) {
                 tmp = result;
-                result.setVal(sum % 10);
+                result.val = sum % 10;
             } else {
                 ListNode currentNode = new ListNode(sum % 10);
-                tmp.setNext(currentNode);
+                tmp.next = currentNode;
                 tmp = currentNode;
             }
             sum = sum / 10;
@@ -39,13 +39,13 @@ public class AddTwoNumbers {
     public static void main(String[] args) {
         //4 -> 3 -> 2 -> 1 (1234)
         ListNode l11 = ListNode.generateReverseListNode1("1234");
-        System.out.println(ListNode.getString(l11));
+        System.out.println(ListNode.getReverseString(l11));
         //8 -> 7 -> 6 -> 5 (5678)
         ListNode l21 = ListNode.generateReverseListNode2("5678");
-        System.out.println(ListNode.getString(l21));
+        System.out.println(ListNode.getReverseString(l21));
         //2 -> 1 -> 9 -> 6 (6912)
         ListNode result = getResult(l11, l21);
-        System.out.println(ListNode.getString(result));
+        System.out.println(ListNode.getReverseString(result));
     }
 
 }

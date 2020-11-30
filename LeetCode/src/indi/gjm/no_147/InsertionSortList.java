@@ -10,60 +10,81 @@ import indi.gjm.po.ListNode;
  */
 public class InsertionSortList {
 
-    public static ListNode getResult(ListNode head) {
-        ListNode result = null;
-        ListNode currentNode = head;
-        //逐一轮询输入链表
-        while (currentNode != null) {
-            //当为输出链表第一个节点时直接新建
-            if (result == null) {
-                result = new ListNode();
-                result.setVal(currentNode.getVal());
-            //否则，轮询输出链表
-            } else {
-                ListNode last = null;
-                ListNode current = result;
-                while (current != null) {
-                    //判断是否能在此节点前插入
-                    if (currentNode.getVal() < current.getVal()) {
-                        ListNode listNode = new ListNode();
-                        listNode.setVal(currentNode.getVal());
-                        listNode.setNext(current);
-                        if (last == null) {
-                            result = listNode;
-                        } else {
-                            last.setNext(listNode);
-                        }
-                        break;
+    public static ListNode getResult1(ListNode head) {
+        if (head == null) return null;
+        ListNode start = head;
+        ListNode cursor = head.next;
+        start.next = null;
+        while (cursor != null) {
+            ListNode last = null;
+            ListNode current = start;
+            while (current != null) {
+                if (cursor.val < current.val) {
+                    ListNode tmp = cursor.next;
+                    cursor.next = current;
+                    if (last == null) {
+                        start = cursor;
+                    } else {
+                        last.next = cursor;
                     }
-                    //判断是否
-                    if (current.getNext() == null) {
-                        ListNode listNode = new ListNode();
-                        listNode.setVal(currentNode.getVal());
-                        current.setNext(listNode);
-                        break;
-                    }
-                    last = current;
-                    current = current.getNext();
+                    cursor = tmp;
+                    break;
                 }
+                if (current.next == null) {
+                    ListNode tmp = cursor.next;
+                    current.next = cursor;
+                    cursor.next = null;
+                    cursor = tmp;
+                    break;
+                }
+                last = current;
+                current = current.next;
             }
-            currentNode = currentNode.getNext();
         }
-        return result;
+        return start;
+    }
+
+    public static ListNode getResult2(ListNode head) {
+        if (head == null) return null;
+        ListNode start = head;
+        ListNode cursor = head.next;
+        ListNode last;
+        while (cursor != null) {
+            last = cursor.next;
+            ListNode current = start;
+            if (cursor.val < current.val) {
+                start = cursor;
+                cursor.next = current;
+            } else {
+                while (current.next.val < cursor.val) {
+                    current = current.next;
+                }
+                cursor.next = current.next;
+                current.next = cursor;
+            }
+            cursor = last;
+        }
+        return start;
     }
 
     public static void main(String[] args) {
         //4 -> 2 -> 1 -> 3
-        ListNode listNode1 = ListNode.generateListNode(new int[]{4, 2, 1, 3});
-        System.out.println(ListNode.getString(listNode1));
-        ListNode result1 = getResult(listNode1);
-        System.out.println(ListNode.getString(result1));
+//        ListNode listNode1 = ListNode.generateListNode(new int[]{4, 2, 1, 3});
+//        System.out.println(ListNode.getString(listNode1));
+//        ListNode result1 = getResult2(listNode1);
+//        System.out.println(ListNode.getString(result1));
 
         //-1 -> 5 -> 3 -> 4 -> 0
-        ListNode listNode2 = ListNode.generateListNode(new int[]{-1, 5, 3, 4, 0});
-        System.out.println(ListNode.getString(listNode2));
-        ListNode result2 = getResult(listNode2);
-        System.out.println(ListNode.getString(result2));
+//        ListNode listNode2 = ListNode.generateListNode(new int[]{-1, 5, 3, 4, 0});
+//        System.out.println(ListNode.getString(listNode2));
+//        ListNode result2 = getResult2(listNode2);
+//        System.out.println(ListNode.getString(result2));
+
+        //-1 -> 5 -> 3 -> 4 -> 0
+        ListNode listNode3 = ListNode.generateListNode(new int[]{1, 1});
+        System.out.println(ListNode.getString(listNode3));
+        ListNode result3 = getResult2(listNode3);
+        System.out.println(ListNode.getString(result3));
     }
 
 }

@@ -2,30 +2,14 @@ package indi.gjm.po;
 
 public class ListNode {
 
-    private int val;
+    public int val;
 
-    private ListNode next;
+    public ListNode next;
 
     public ListNode() {
     }
 
     public ListNode(int x) { val = x; }
-
-    public int getVal() {
-        return val;
-    }
-
-    public void setVal(int val) {
-        this.val = val;
-    }
-
-    public ListNode getNext() {
-        return next;
-    }
-
-    public void setNext(ListNode next) {
-        this.next = next;
-    }
 
     /**
      * 生成链表（循环）倒序
@@ -41,11 +25,11 @@ public class ListNode {
         for (int i = str.length()-1; i >= 0; i--) {
             if (last == null) {
                 result = last = new ListNode();
-                last.setVal(str.charAt(i) - '0');
+                last.val = str.charAt(i) - '0';
             } else {
                 ListNode currentNode = new ListNode();
-                last.setNext(currentNode);
-                currentNode.setVal(str.charAt(i) - '0');
+                last.next = currentNode;
+                currentNode.val = str.charAt(i) - '0';
                 last = currentNode;
             }
         }
@@ -65,8 +49,8 @@ public class ListNode {
             return null;
         } else {
             ListNode listNode = new ListNode();
-            listNode.setVal(str.charAt(str.length() - 1) - '0');
-            listNode.setNext(generateReverseListNode2(str.substring(0, str.length() - 1)));
+            listNode.val = str.charAt(str.length() - 1) - '0';
+            listNode.next = generateReverseListNode2(str.substring(0, str.length() - 1));
             return listNode;
         }
     }
@@ -87,9 +71,9 @@ public class ListNode {
             ListNode lastNode = null;
             for (int num : array) {
                 ListNode listNode = new ListNode();
-                listNode.setVal(num);
+                listNode.val = num;
                 if (lastNode != null) {
-                    lastNode.setNext(listNode);
+                    lastNode.next = listNode;
                 } else {
                     result = listNode;
                 }
@@ -109,7 +93,7 @@ public class ListNode {
      */
     public static String getReverseString(ListNode listNode) {
         if (listNode != null) {
-            return getReverseString(listNode.getNext()) + listNode.getVal();
+            return getReverseString(listNode.next) + listNode.val;
         } else {
             return "";
         }
@@ -124,7 +108,7 @@ public class ListNode {
      */
     public static String getString(ListNode listNode) {
         if (listNode != null) {
-            return listNode.getVal() + getString(listNode.getNext());
+            return listNode.val + getString(listNode.next);
         } else {
             return "";
         }
